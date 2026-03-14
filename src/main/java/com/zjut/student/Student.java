@@ -4,7 +4,7 @@ public class Student{
     private int age;
     private String name;
     private String classroom;
-    private int Id;
+    private int id;
 
     public Student(){
     }
@@ -16,7 +16,7 @@ public class Student{
     }
 
     public Student(int id,int age,String name,String classroom){
-        this.Id = id;
+        this.id = id;
         this.age = age;
         this.name = name;
         this.classroom =classroom;
@@ -47,10 +47,10 @@ public class Student{
     }
 
     public void setId(int id){
-        this.Id = id;
+        this.id = id;
     }
 
     public int getId(){
-        return this.Id;
+        return this.id;
     }
 }

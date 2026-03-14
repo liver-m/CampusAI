@@ -12,7 +12,7 @@ public class DBUtil {
     private static String password;
     //1.读取properties文件 2.写入到Properties变量 3.连接数据库
     static{
-        System.out.println("🚀 正在读取配置文件... (只读这一次)");
+        System.out.println("正在读取配置文件...");
         Properties props = new Properties();
         String configFile = "src/main/resources/db.properties";
 
