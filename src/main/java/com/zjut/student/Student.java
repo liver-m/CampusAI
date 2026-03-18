@@ -1,6 +1,6 @@
 package com.zjut.student;
 
-public class Student{
+public class Student {
     private int age;
     private String name;
     private String classroom;
@@ -15,7 +15,7 @@ public class Student{
         this.classroom = classroom;
     }
 
-    public Student(int id,int age,String name,String classroom){
+    public Student(int id, int age, String name, String classroom){
         this.id = id;
         this.age = age;
         this.name = name;

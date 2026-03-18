@@ -36,7 +36,7 @@ public class StudentService {
 
     //get all students
     public List<Student> getAllStudents() {
-        List<Student> students = new ArrayList<>();
+        List<Student> studentEntities = new ArrayList<>();
         String sql = "select * from tb_student";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -50,16 +50,17 @@ public class StudentService {
                 String classroom = rs.getString("classroom");
 
                 Student student = new Student(id, age, name, classroom);
-                students.add(student);
+                studentEntities.add(student);
             }
         } catch (SQLException e) {
             System.out.println("查询学生时出错："+e.getMessage());
             throw new RuntimeException("查询学生失败",e);
         }
-        return students;
+        return studentEntities;
     }
 
     //查询单个学生
+    //按id查询
     public Student getStudentById(int ID){
         Student student = null;
         String sql = "select * from tb_student where id = ?";
@@ -85,7 +86,31 @@ public class StudentService {
         return student;
     }
 
+    //按姓名查询
+    public Student getStudentByName(String Name){
+        Student student = null;
+        String sql = "select * from tb_student where name = ?";
 
+        try(Connection coon = DBUtil.getConnection();
+            PreparedStatement pstmt = coon.prepareStatement(sql)){
+
+            pstmt.setString(1,Name);
+
+            try(ResultSet rs = pstmt.executeQuery()) {
+                if(rs.next()){
+                    int id = rs.getInt("id");
+                    int age = rs.getInt("age");
+                    String name = rs.getString("name");
+                    String classroom = rs.getString("classroom");
+
+                    student = new Student(id, age, name, classroom);
+                }
+            }
+        }catch(SQLException e){
+            throw new RuntimeException("数据库连接出错",e);
+        }
+        return student;
+    }
     //删除学生
     public void deleteStudent(int id){
         String sql = "delete from tb_student where id = ?";

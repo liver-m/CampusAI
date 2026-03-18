@@ -21,7 +21,7 @@
     </properties>
 
     <dependencies>
-        <!-- MySQL 数据库驱动 -->
+        <!-- MySQL 数据库驱动（你原有的，版本8.3.0完全保留） -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>

@@ -1,5 +1,4 @@
 package com.zjut.student;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,13 +24,21 @@ public class StudentView {
                     getAllStudentUI();
                     break;
                 case 4 :
-                    getStudentByIdUI();
+                    switch(choices2()){
+                        case 1:
+                            getStudentByIdUI();
+                            break;
+                        case 2:
+                            getStudentByNameUI();
+                            break;
+                    }
+
                     break;
                 case 5 :
                     deleteStudentUI();
                     break;
                 case 6 :
-                    exit(0);       //???
+                    exit(0);
                 default:
                     break;
             }
@@ -48,6 +55,16 @@ public class StudentView {
                 5.删除某个学生
                 6.退出""");
 
+        choice = scanner.nextInt();
+        return choice;
+    }
+
+    private int choices2(){
+        int choice;
+        System.out.println("""
+                1.根据id查询
+                2.根据姓名查询
+                """);
         choice = scanner.nextInt();
         return choice;
     }
@@ -71,8 +88,8 @@ public class StudentView {
     }
 
     private void getAllStudentUI(){
-        List<Student> students = service.getAllStudents();
-        for(Student stu : students){
+        List<Student> studentEntities = service.getAllStudents();
+        for(Student stu : studentEntities){
             System.out.println("ID："+stu.getId()+
                     ", 姓名："+stu.getName()+
                     ", 年龄："+stu.getAge()+
@@ -85,6 +102,21 @@ public class StudentView {
         int id = scanner.nextInt();
         scanner.nextLine();
         printStudent(id);
+    }
+
+    private void getStudentByNameUI(){
+        System.out.println("请输入你要查询的学生的姓名：");
+        String name = scanner.next();
+        scanner.nextLine();
+        Student student = service.getStudentByName(name);
+        if (student != null) {
+            System.out.println("ID："+ student.getId()+
+                    ", 姓名："+ student.getName()+
+                    ", 年龄："+ student.getAge()+
+                    ", 班级："+ student.getClassroom());
+        }else{
+            System.out.println("不存在姓名为"+name+"的学生");
+        }
     }
 
     private void deleteStudentUI(){
@@ -122,10 +154,10 @@ public class StudentView {
         Student student = service.getStudentById(id);
 
         if (student != null) {
-            System.out.println("ID："+student.getId()+
-                    ", 姓名："+student.getName()+
-                    ", 年龄："+student.getAge()+
-                    ", 班级："+student.getClassroom());
+            System.out.println("ID："+ student.getId()+
+                    ", 姓名："+ student.getName()+
+                    ", 年龄："+ student.getAge()+
+                    ", 班级："+ student.getClassroom());
             return true;
         }else{
             System.out.println("不存在ID为"+id+"的学生");
