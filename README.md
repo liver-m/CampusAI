@@ -7,7 +7,7 @@
 
 ## 🚀 进化路线图 (Roadmap)
 - [x] **阶段 0 (Phase 0)**: 环境配置与自动化构建 (CI/CD)。
-- [ ] **阶段 1 (Phase 1)**: 重构为 Spring Boot 3 + Java 21 虚拟线程 (解决高并发)。
+- [ ] **阶段 1 (Phase 1)**: 重构为 Spring Boot 4 + Java 21 虚拟线程 (解决高并发)。
 - [ ] **阶段 2 (Phase 2)**: 云原生化 (Docker & Kubernetes)。
 - [ ] **阶段 3 (Phase 3)**: AI 注入 (接入 LangChain4j 与 RAG 架构)。
 
@@ -19,4 +19,4 @@
 ## 💻 如何运行 (How to Run)
 1. 克隆项目: `git clone https://github.com/liver-m/StudentManagementSystem.git`
 2. 确保安装了 JDK 21 和 Maven。
-3. 修改数据库配置，然后运行 `mvn clean install`。
+3. 修改数据库配置，然后运行 `mvn spring-boot:run`。
