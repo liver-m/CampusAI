@@ -3,22 +3,29 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <!--标签及其属性：定义了XML的命名空间，这能确保你的pom.xml文件格式是符合Maven标准的，避免标签写错。-->
+
     <modelVersion>4.0.0</modelVersion>
     <!--这是必需的元素，声明了当前POM模型的版本-->
+
+    <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>4.0.5</version>
+    </parent>
+
     <groupId>com.zjut.student</groupId>
     <artifactId>student-management-system</artifactId>
     <version>1.0</version>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <!--作用：指定Java源代码编译版本和目标字节码版本。
-        你的设置：21，表示你的项目使用 Java 21 编译。
-        影响：这决定了你能使用哪些Java特性。比如，如果设置为8，你就无法使用Java 11或17的新特性（如var关键字、record等）。-->
+        <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--作用：指定项目构建时使用的编码格式。
         UTF-8，这是国际标准，能很好地支持中文-->
     </properties>
+
+
+
 
     <dependencies>
         <!-- MySQL 数据库驱动（你原有的，版本8.3.0完全保留） -->
@@ -28,5 +35,23 @@
             <version>8.3.0</version>
             <scope>runtime</scope>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+    </build>
 </project>

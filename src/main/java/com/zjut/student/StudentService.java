@@ -133,46 +133,49 @@ public class StudentService {
             String name, Integer ageMin, Integer ageMax,String classroom,
             int currentPage, int pageSize) {
         StringBuilder sql = new StringBuilder("select * from tb_student where 1=1");
-        List<Student> params = new ArrayList<>();
+        List<Object> params = new ArrayList<>();
 
         if(name != null && !name.trim().isEmpty()){
-            sql.append("and name = %?%");
+            sql.append(" and name like ?");
+            params.add("%" + name + "%");
         }
 
         if(ageMin != null){
             sql.append("and age >= ?");
+            params.add(ageMin);
         }
 
         if(ageMax != null){
-            sql.append("and age <= ?");
+            sql.append(" and age <= ?");
+            params.add(ageMax);
         }
 
         if(classroom != null && !classroom.trim().isEmpty()){
-            sql.append("and classroom = %?%");
+            sql.append(" and classroom like ?");
+            params.add("%" + classroom + "%");
         }
 
         try(Connection coon = DBUtil.getConnection();
         PreparedStatement pstmt = coon.prepareStatement(String.valueOf(sql))){
-            pstmt.setString(1,name);
-            pstmt.setInt(2,ageMin);
-            pstmt.setInt(3,ageMax);
-            pstmt.setString(4,classroom);
 
+            for(int i =0; i < params.size(); i++){
+                pstmt.setObject(i + 1, params.get(i));
+            }
+
+            List<Student> list = new ArrayList<>();
             try(ResultSet rs = pstmt.executeQuery()){
-                if(rs.next()){
-                    int id = rs.getInt("id");
-                    int age = rs.getInt("age");
-                    String name1 = rs.getString("name");
-                    String classroom1 = rs.getString("classroom");
-
-                    Student stu1 = new Student(id,age,name1,classroom1);
-                    params.add(stu1);
+                while(rs.next()){
+                    list.add(new Student(
+                        rs.getInt("id"),
+                        rs.getInt("age"),
+                        rs.getString("name"),
+                        rs.getString("classroom")
+                    ));
                 }
             }
 
-            int total = params.size();
-            List<Student> list= new ArrayList<>(params.subList(currentPage,pageSize));
-            return new PageResult<>(total, params, currentPage, pageSize);
+            return new PageResult<>(list.size(), list, currentPage, pageSize);
+
         }catch(SQLException e){
             throw new RuntimeException(e);
         }

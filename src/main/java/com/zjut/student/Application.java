@@ -1,8 +1,13 @@
 package com.zjut.student;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
 public class Application {
     public static void main(String[] args) {
-        StudentView sv = new StudentView();
-        sv.start();
+
+        SpringApplication.run(Application.class,args);
+
     }
 }
