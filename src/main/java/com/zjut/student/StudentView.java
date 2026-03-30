@@ -89,7 +89,7 @@ public class StudentView {
         System.out.println("请输入学生的班级：");
         String classroom = scanner.nextLine();
 
-        Student student = new Student(age,name,classroom);
+        Student student = new Student(name,age,classroom);
         service.addStudent(student);
     }
 
@@ -124,7 +124,7 @@ public class StudentView {
 
     private void getStudentByIdUI(){
         System.out.println("请输入你要查询的学生的id：");
-        int id = scanner.nextInt();
+        Long id = scanner.nextLong();
         scanner.nextLine();
         printStudent(id);
     }
@@ -146,7 +146,7 @@ public class StudentView {
 
     private void deleteStudentUI(){
         System.out.println("请输入你要删除的学生的id：");
-        int id = scanner.nextInt();
+        Long id = scanner.nextLong();
         scanner.nextLine();
 
         if(!printStudent(id))return;
@@ -156,7 +156,7 @@ public class StudentView {
 
     private void updateStudentUI(){
         System.out.println("请输入你要更改的学生的id：");
-        int id = scanner.nextInt();
+        Long id = scanner.nextLong();
         scanner.nextLine();
 
         if(!printStudent(id))return;
@@ -170,11 +170,11 @@ public class StudentView {
         System.out.println("你要将其班级改为：");
         String classroom = scanner.nextLine();
 
-        Student student2 = new Student(id,age,name,classroom);
+        Student student2 = new Student(id,name,age,classroom);
         service.updateStudent(student2);
     }
 
-    private boolean printStudent(int id){
+    private boolean printStudent(Long id){
 
         Student student = service.getStudentById(id);
 

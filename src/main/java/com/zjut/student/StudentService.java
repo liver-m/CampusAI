@@ -44,12 +44,12 @@ public class StudentService {
 
 
             while (rs.next()) {
-                int id = rs.getInt("id");
+                Long id = rs.getLong("id");
                 int age = rs.getInt("age");
                 String name = rs.getString("name");
                 String classroom = rs.getString("classroom");
 
-                Student student = new Student(id, age, name, classroom);
+                Student student = new Student(id, name,age, classroom);
                 studentEntities.add(student);
             }
         } catch (SQLException e) {
@@ -61,23 +61,23 @@ public class StudentService {
 
     //查询单个学生
     //按id查询
-    public Student getStudentById(int ID){
+    public Student getStudentById(Long ID){
         Student student = null;
         String sql = "select * from tb_student where id = ?";
 
         try(Connection coon = DBUtil.getConnection();
         PreparedStatement pstmt = coon.prepareStatement(sql)){
 
-            pstmt.setInt(1,ID);
+            pstmt.setLong(1,ID);
 
             try(ResultSet rs = pstmt.executeQuery()) {
                 if(rs.next()){
-                    int id = rs.getInt("id");
+                    Long id = rs.getLong("id");
                     int age = rs.getInt("age");
                     String name = rs.getString("name");
                     String classroom = rs.getString("classroom");
 
-                    student = new Student(id, age, name, classroom);
+                    student = new Student(id, name,age,  classroom);
                 }
             }
         }catch(SQLException e){
@@ -98,12 +98,12 @@ public class StudentService {
 
             try(ResultSet rs = pstmt.executeQuery()) {
                 if(rs.next()){
-                    int id = rs.getInt("id");
+                    Long id = rs.getLong("id");
                     int age = rs.getInt("age");
                     String name = rs.getString("name");
                     String classroom = rs.getString("classroom");
 
-                    student = new Student(id, age, name, classroom);
+                    student = new Student(id, name, age, classroom);
                 }
             }
         }catch(SQLException e){
@@ -166,9 +166,9 @@ public class StudentService {
             try(ResultSet rs = pstmt.executeQuery()){
                 while(rs.next()){
                     list.add(new Student(
-                        rs.getInt("id"),
-                        rs.getInt("age"),
+                        rs.getLong("id"),
                         rs.getString("name"),
+                        rs.getInt("age"),
                         rs.getString("classroom")
                     ));
                 }
@@ -183,13 +183,13 @@ public class StudentService {
     }
 
     //删除学生
-    public void deleteStudent(int id){
+    public void deleteStudent(Long id){
         String sql = "delete from tb_student where id = ?";
 
         try(Connection conn = DBUtil.getConnection();
         PreparedStatement pstmt = conn.prepareStatement(sql)){
 
-            pstmt.setInt(1,id);
+            pstmt.setLong(1,id);
             int rows = pstmt.executeUpdate();
 
             if(rows > 0){
@@ -215,7 +215,7 @@ public class StudentService {
             pstmt.setInt(1,stu.getAge());
             pstmt.setString(2,stu.getName());
             pstmt.setString(3,stu.getClassroom());
-            pstmt.setInt(4,stu.getId());
+            pstmt.setLong(4,stu.getId());
 
             int rows = pstmt.executeUpdate();
             if(rows > 0){
