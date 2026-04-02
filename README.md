@@ -20,3 +20,7 @@
 1. 克隆项目: `git clone https://github.com/liver-m/StudentManagementSystem.git`
 2. 确保安装了 JDK 21 和 Maven。
 3. 修改数据库配置，然后运行 `mvn spring-boot:run`。
+
+## Docker运行
+1. `docker build -t student-management-system .`
+2. `docker run -p 8080:8080 student-management-system`
