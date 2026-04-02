@@ -7,12 +7,13 @@
 
 ## 🚀 进化路线图 (Roadmap)
 - [x] **阶段 0 (Phase 0)**: 环境配置与自动化构建 (CI/CD)。
-- [ ] **阶段 1 (Phase 1)**: 重构为 Spring Boot 4 + Java 21 虚拟线程 (解决高并发)。
+- [x] **阶段 1a**: Spring Boot 4 骨架 + Docker（已完成）。
+- [ ] **阶段 1b**: Java 21 虚拟线程（下周完成）。
 - [ ] **阶段 2 (Phase 2)**: 云原生化 (Docker & Kubernetes)。
 - [ ] **阶段 3 (Phase 3)**: AI 注入 (接入 LangChain4j 与 RAG 架构)。
 
 ## 🛠️ 技术栈 (Tech Stack)
-- **后端 (Backend)**: Java 21 (虚拟线程), JDBC, Servlet.
+- **后端 (Backend)**: Java 21 (虚拟线程), Spring Boot 4, JPA, H2.
 - **数据库 (Database)**: MySQL.
 - **工具 (Tools)**: Docker, Maven, GitHub Actions.
 
