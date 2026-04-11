@@ -39,4 +39,9 @@ public class StudentController {
     public void deleteStu(@PathVariable Long id){
         studentServiceV2.deleteStudentById(id);
     }
+
+    @PutMapping("{id}")
+    public Student updateStu(@PathVariable Long id,@RequestBody Student stu){
+        return studentServiceV2.updateStudent(id,stu);
+    }
 }

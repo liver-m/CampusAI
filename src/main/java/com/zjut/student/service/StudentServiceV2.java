@@ -36,7 +36,19 @@ public class StudentServiceV2 {
 
     //按ID删除学生
     public void deleteStudentById(Long id){
-        studentRepository.deleteById(id);
+        Optional<Student> result = studentRepository.findById(id);
+        if(result.isEmpty())throw new StudentNotFoundException(id);
+        else studentRepository.deleteById(id);
+    }
+
+    //修改学生信息
+    public Student updateStudent(Long id, Student student){
+        Optional<Student> result = studentRepository.findById(id);
+        if(result.isEmpty())throw new StudentNotFoundException(id);
+        else{
+            student.setId(id);
+            return studentRepository.save(student);
+        }
     }
 }
 
