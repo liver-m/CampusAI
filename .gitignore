@@ -21,6 +21,7 @@ target/
 
 # 数据库配置文件（保护密码）
 src/main/resources/db.properties
+src/main/resources/application.properties
 
 ### NetBeans ###
 /nbproject/private/
