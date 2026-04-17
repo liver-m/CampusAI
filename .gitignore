@@ -41,3 +41,6 @@ build/
 ### PostMan ###
 postman/
 .postman/
+
+### Docker ###
+docker-compose.yml
