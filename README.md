@@ -1,4 +1,4 @@
-# Student Management System | 学生管理系统
+# CampusAI | 校园智能体
 ![Java CI](https://github.com/liver-m/StudentManagementSystem/actions/workflows/maven.yml/badge.svg)
 
 ## 📖 项目简介 (Introduction)
