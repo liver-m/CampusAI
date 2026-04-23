@@ -1,6 +1,6 @@
 package com.zjut.campusai.repository;
 
-import com.zjut.campusai.Student;
+import com.zjut.campusai.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

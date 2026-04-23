@@ -1,7 +1,8 @@
 package com.zjut.campusai.service;
 
-import com.zjut.campusai.Student;
+import com.zjut.campusai.entity.Student;
 import com.zjut.campusai.exception.StudentNotFoundException;
+import com.zjut.campusai.repository.StudentCourseRepository;
 import com.zjut.campusai.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,11 @@ import java.util.Optional;
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
-
+    private final StudentCourseRepository studentCourseRepository;
     @Autowired
-    public StudentService(StudentRepository studentRepository){
+    public StudentService(StudentRepository studentRepository,StudentCourseRepository studentCourseRepository){
         this.studentRepository = studentRepository;
+        this.studentCourseRepository = studentCourseRepository;
     }
 
     //查所有学生
@@ -58,6 +60,7 @@ public class StudentService {
         }
     }
 
+    //修改学生成绩
     public Student updateScore(Long id, int newScore){
         Optional<Student> result = studentRepository.findById(id);
         if(result.isEmpty())throw new StudentNotFoundException(id);
@@ -66,6 +69,13 @@ public class StudentService {
             student.setScore(newScore);
             return studentRepository.save(student);
         }
+    }
+
+    //根据Id进行联表查询学生的选课成绩
+    public List<Object[]> getStudentCourseScoreById(Long id){
+        Optional<Student> result1 = studentRepository.findById(id);
+        if(result1.isEmpty())throw new StudentNotFoundException(id);
+        return studentCourseRepository.findCoursesByStudentId(id);
     }
 }
 

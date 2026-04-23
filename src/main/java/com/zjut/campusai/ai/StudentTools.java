@@ -1,10 +1,12 @@
 package com.zjut.campusai.ai;
 
-import com.zjut.campusai.Student;
+import com.zjut.campusai.entity.Student;
 import com.zjut.campusai.service.StudentService;
 import dev.langchain4j.agent.tool.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class StudentTools {
@@ -29,5 +31,17 @@ public class StudentTools {
             return "不存在id为" + studentId + "的学生";
         }
         return s.toString();
+    }
+
+    @Tool("根据学生id查询学生的各科成绩,并给学生推荐学习课程")
+    public String getCourseRecommendation(Long studentId){
+        List<Object[]> list =  studentService.getStudentCourseScoreById(studentId);
+        if(list.isEmpty())return "没有该学生的选课记录";
+
+        StringBuilder sb = new StringBuilder();
+        list.forEach(row ->{
+            sb.append(String.format("%s - %s\n", row[0], row[1]));
+        });
+        return sb.toString();
     }
 }
