@@ -1,12 +1,12 @@
 package com.zjut.campusai.ai;
 
+import com.zjut.campusai.dto.WarningReport;
 import com.zjut.campusai.entity.Student;
 import com.zjut.campusai.service.StudentService;
 import dev.langchain4j.agent.tool.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 
 @Component
 public class StudentTools {
@@ -17,31 +17,25 @@ public class StudentTools {
     }
 
     @Tool("根据学生姓名查询学生信息")
-    public Student getStu(String name){
+    public Student getStudentInfoByName(String name){
         return studentService.getStudentByName(name);
     }
 
+    @Tool("根据学生id查询学生信息")
+    public Student getStudentInfoById(Long studentId) { return studentService.getStudentById(studentId);}
+
     @Tool("根据学生id修改学生的成绩，成绩只能在0~100之间。")
     public String updateScore(Long studentId, int newScore){
-        if(newScore < 0 ||newScore > 100)return "成绩不合适，应是0~100之间";
-        Student s;
-        try{
-             s = studentService.updateScore(studentId,newScore);
-        }catch(Exception e){
-            return "不存在id为" + studentId + "的学生";
-        }
-        return s.toString();
+        return studentService.updateScore(studentId,newScore);
     }
 
     @Tool("根据学生id查询学生的各科成绩,并给学生推荐学习课程")
     public String getCourseRecommendation(Long studentId){
-        List<Object[]> list =  studentService.getStudentCourseScoreById(studentId);
-        if(list.isEmpty())return "没有该学生的选课记录";
+        return studentService.getCourseRecommendation(studentId);
+    }
 
-        StringBuilder sb = new StringBuilder();
-        list.forEach(row ->{
-            sb.append(String.format("%s - %s\n", row[0], row[1]));
-        });
-        return sb.toString();
+    @Tool("根据id查询学生课程成绩，并给出成绩预警")
+    public WarningReport generateWarningReport(Long studentId){
+        return studentService.generateWarningReport(studentId);
     }
 }
