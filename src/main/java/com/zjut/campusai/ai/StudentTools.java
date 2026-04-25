@@ -29,7 +29,7 @@ public class StudentTools {
         return studentService.updateScore(studentId,courseName,newScore);
     }
 
-    @Tool("根据学生id查询学生的各科成绩,并给学生推荐学习课程")
+    @Tool("根据学生id查询学生的不及格科目的成绩,并给学生推荐学习课程")
     public String getCourseRecommendation(Long studentId){
         return studentService.getCourseRecommendation(studentId);
     }
