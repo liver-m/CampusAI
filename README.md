@@ -11,8 +11,8 @@
 
 - [x] **Phase 0**：环境配置 + GitHub Actions CI ✅
 - [x] **Phase 1**：Spring Boot 骨架 + Docker + MySQL + Java 21 虚拟线程验证 ✅
-- [ ] **Phase 2**：Tool-Calling Agent —— LangChain4j + Ollama + 4个业务Tool + 结构化输出 + 多轮记忆 🚧
-- [ ] **Phase 3（4.27-5.3）**：生产地基 —— DTO/VO分层 + 全局异常 + 参数校验 + 事务进阶 + Redis缓存 + 完整重构 
+- [x] **Phase 2**：Tool-Calling Agent —— LangChain4j + Ollama + 4个业务Tool + 结构化输出 + 多轮记忆 ✅
+- [ ] **Phase 3（4.27-5.3）**：生产地基 —— DTO/VO分层 + 全局异常 + 参数校验 + 事务进阶 + Redis缓存 + 完整重构 🚧
 - [ ] **Phase 4（5.4-6.10）**：Multi-Agent + RAG —— Supervisor Agent + Specialist Agent + 向量检索 + Redis持久化记忆 + JWT + CI/CD + 公网部署
 - [ ] **Phase 5（6.11-8.31）**：核弹化 —— Prometheus + Grafana可观测性 + Resilience4j限流熔断 + 压测报告 + OpenTelemetry
 
