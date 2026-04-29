@@ -1,8 +1,16 @@
 package com.zjut.campusai.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 public class StudentRequest {
+    @NotBlank
     private String name;
+    @NotBlank
     private String classroom;
+    @Min(0)
+    @Max(150)
     private int age;
 
     public int getAge() {

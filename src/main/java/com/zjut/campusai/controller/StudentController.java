@@ -4,6 +4,7 @@ import com.zjut.campusai.common.ApiResponse;
 import com.zjut.campusai.dto.StudentRequest;
 import com.zjut.campusai.service.StudentService;
 import com.zjut.campusai.vo.StudentVO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +41,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ApiResponse<StudentVO> addStu(@RequestBody StudentRequest request){
+    public ApiResponse<StudentVO> addStu(@RequestBody @Valid StudentRequest request){
         return ApiResponse.success(studentService.addStudent(request));
     }
 
@@ -51,7 +52,7 @@ public class StudentController {
     }
 
     @PutMapping("{id}")
-    public ApiResponse<StudentVO> updateStu(@PathVariable Long id,@RequestBody StudentRequest stu){
+    public ApiResponse<StudentVO> updateStu(@PathVariable Long id,@RequestBody @Valid StudentRequest stu){
         return ApiResponse.success(studentService.updateStudent(id,stu));
     }
 }
